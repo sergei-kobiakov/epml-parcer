@@ -5,28 +5,19 @@ import org.parboiled.annotations.BuildParseTree;
 @BuildParseTree
 class CalculatorParser extends BaseParser<Object> {
 
-    Rule empl() {
-        return Sequence(metadata(), article());
+    Rule Expression() {
+        return Sequence(Term(), ZeroOrMore(AnyOf("+-"), Term()));
     }
 
-    Rule metadata() {
-        return OneOrMore(TestNot("_PI_"), ANY);
+    Rule Term() {
+        return Sequence(Factor(), ZeroOrMore(AnyOf("*/"), Factor()));
     }
 
-    Rule article() {
-        return OneOrMore(paragraph());
+    Rule Factor() {
+        return Sequence('(', Expression(), ')');
     }
 
-    Rule  paragraph(){
-        return Sequence(paragraphTag(), paragraphContent());
-    }
-
-    Rule paragraphTag(){
-     return String("_PI_");
-    }
-
-    Rule paragraphContent() {
-        return ZeroOrMore(TestNot("_PI_"), ANY);
+    Rule Number() {
+        return OneOrMore(CharRange('0', '9'));
     }
 }
-

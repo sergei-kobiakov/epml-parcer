@@ -8,10 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
         String input = "metadata" +
-                "_PI_P1\n" +
-                "_PI_P2\n" +
-                "_PI_P2\n";
-        CalculatorParser parser = Parboiled.createParser(CalculatorParser.class);
+                "_PI_not bold1_B_bold_b_not bold1_B_bold2_b_fdfdfdfdfdfdfd" +
+                "_PI_not bold3_B_bold_b_not bold3_B_bold4_b_fdfdfdfdfdfdfd";
+        Epml parser = Parboiled.createParser(Epml.class);
         ParsingResult<?> result = new ReportingParseRunner(parser.empl()).run(input);
 
 
