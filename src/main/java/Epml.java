@@ -29,12 +29,12 @@ class Epml extends BaseParser<Object> {
         return Sequence(simpleText(), boldText(), Optional(Sequence(Test(ANY), text())));
     }
 
-     Rule boldText() {
+    Rule boldText() {
         return Optional(Sequence("_B_", OneOrMore(TestNot("_b_"), ANY), "_b_"));
     }
 
     Rule simpleText() {
-        return ZeroOrMore(TestNot("_B_"), ANY);
+        return Optional(OneOrMore(TestNot("_B_"), TestNot("_PI_"), ANY));
     }
 }
 
